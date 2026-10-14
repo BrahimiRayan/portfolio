@@ -15,7 +15,6 @@ const Clicker = document.querySelector("#Clicker");
 const Goright = document.querySelector('#Goright') 
 const Goleft = document.querySelector('#Goleft')
 
-
 const projects = [
   {
     name: 'Mega Shop',
@@ -111,6 +110,10 @@ function holdButton(btn, key, repeat) {
   );
   btn.addEventListener('contextmenu', (e) => e.preventDefault());   // no long-press menu on phones
 }
+
+carDial.addEventListener('click', function(){
+   window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+})
 
 holdButton(Goleft,  'ArrowLeft',  true);
 holdButton(Goright, 'ArrowRight', true);

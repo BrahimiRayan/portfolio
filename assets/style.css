@@ -129,8 +129,7 @@ margin-left: 1rem;
   left: 0;
   width: var(--worldSize);
   height: 100%;
-  background: rgb(251, 80, 64);
-  background-image: url(img/bg62.jpg);
+  background-image: url(img/bg62.jpg) , linear-gradient(to top ,  rgb(251, 80, 64) 80% ,  rgb(251, 117, 64) 95%);
   background-position: 0px 0px ;
   background-repeat: repeat-x;
 }
@@ -342,5 +341,15 @@ margin-left: 1rem;
   }
   .pannel p{
     font-size: .8rem;
+  }
+  .title{
+    font-size: 1.2rem;
+  }
+  .WinContent{
+    font-size: 1.1rem;
+  }
+
+  .ProjectsBanner{
+    top: 76%;
   }
 }
