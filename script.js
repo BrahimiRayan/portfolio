@@ -15,23 +15,6 @@ const Clicker = document.querySelector("#Clicker");
 const Goright = document.querySelector('#Goright') 
 const Goleft = document.querySelector('#Goleft')
 
-closeScreen.addEventListener('click',function(){
-  cptr_bg.style.display = 'none'
-});
-
-// I am tiered , so to tommorow me , you better fix this lazzy approche to move the caracter without the keybord touches
-
-Clicker.addEventListener('click', function(){
-   window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-})
-
-Goright.addEventListener('click', function(){
-   window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
-})
-
-Goleft.addEventListener('click', function(){
-   window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
-})
 
 const projects = [
   {
@@ -100,7 +83,38 @@ const projects = [
   },
 
 ];
-const SPEED = 20
+const SPEED = 10
+
+closeScreen.addEventListener('click',function(){
+  cptr_bg.style.display = 'none'
+});
+
+function holdButton(btn, key, repeat) {
+  let timer = null;
+  const press = () => window.dispatchEvent(new KeyboardEvent('keydown', { key }));
+
+  const stop = () => {
+    if (timer === null) return;
+    clearInterval(timer);
+    timer = null;
+    window.dispatchEvent(new KeyboardEvent('keyup', { key }));   
+  };
+
+  btn.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    press();                                        
+    if (repeat) timer = setInterval(press, 40);
+  });
+
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) =>
+    btn.addEventListener(ev, stop)
+  );
+  btn.addEventListener('contextmenu', (e) => e.preventDefault());   // no long-press menu on phones
+}
+
+holdButton(Goleft,  'ArrowLeft',  true);
+holdButton(Goright, 'ArrowRight', true);
+holdButton(Clicker, 'Enter',      false);  
 
 let sp = 0;
 projects.forEach((p, index) => {
@@ -131,7 +145,6 @@ window.addEventListener('keydown', function (event) {
     sprite.classList.add('walking');
     sprite.style.transform = 'scaleX(-1)';
   } else if (event.key === 'ArrowRight') {
-    // m = Math.min(m + SPEED, wold.offsetWidth - caracter.offsetWidth);
     m = Math.min(m + SPEED, wold.offsetWidth - sprite.offsetWidth); 
     sprite.classList.add('walking');
     sprite.style.transform = 'scaleX(1)';
@@ -167,7 +180,7 @@ window.addEventListener('keydown', function (event) {
     cptr_bg.style.display = 'flex'
 
     Wintitle.innerText = `Contacts.exe`
-// For tommorow me u need to fix this and replace it with an actuelle code , I AM WORNING YOU!
+
 winCntt.innerHTML = `
   Développeur passionné par le <b>web</b> et les <b>systèmes</b>.
   Titulaire d'une double licence : <b>Systèmes d'Information</b> (Université de Béjaïa) et <b>Informatique Générale</b> (ISIMA).
