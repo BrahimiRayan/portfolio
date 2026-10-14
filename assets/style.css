@@ -37,6 +37,8 @@ body {
   z-index: 1;
 }
 
+
+
 .carInfo{
   display: flex;
   margin-top: 1rem;
@@ -200,7 +202,6 @@ margin-left: 1rem;
 }
 
 .marker.near {
-
   animation: bouncing 1s infinite;
   
 }
@@ -320,3 +321,26 @@ margin-left: 1rem;
   }
 }
 
+
+@media (width < 700px) {
+  .controlsInfo {
+    display: none;
+  }
+
+  .world{
+    background-position: 0px 98% ;
+  }
+  .contactHouse{
+    top: 50%;
+  }
+  .ContactsBanner{
+    top: 75%;
+  }
+  .carPic{
+    width: 45px;
+    height: 45px;
+  }
+  .pannel p{
+    font-size: .8rem;
+  }
+}
